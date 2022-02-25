@@ -1,4 +1,8 @@
-<form action="/users" method="POST">
+<% if(error){ %>
+    <em> <%=error%></em>
+<%}%>
+<h2>Log on in boi!</h2>
+<form action="/users/login" method="POST">
     <label for="email">Email:</label>
     <input type="email" name="email" id="email">
     
@@ -6,5 +10,5 @@
     <label for="email">Password:</label>
     <input type="password" name="password" id="password">
     
-    <button type="submit">Sign Up</button>
+    <button type="submit">Log In</button>
 </form>
