@@ -11,7 +11,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(ejsLayouts)
 
-// middleware that allows us to access the 'moment' library in every EJS view
+// middleware
 
 
 // GET / - display all articles and their authors
