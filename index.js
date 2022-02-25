@@ -1,6 +1,7 @@
 const express = require('express')//import express
 const ejsLayouts = require('express-ejs-layouts')//import ejs layous
 require('dotenv').config()//allow access to env vars
+const db = require('./models')
 
 const app = express()//create instance of express
 //check for env port if not, use 3000
@@ -14,12 +15,18 @@ app.use(ejsLayouts)//tell express to use ejs layouts
 
 // middleware
 
+//CONTROLLER
+app.use('/users', require('./controllers/users.js'))
+
 
 // GET / - display all articles and their authors
 app.get('/', (req, res) => {
   res.render(`home.ejs`)
   
 })
+
+//CONTROLLER
+app.use('/users', require('./controllers/users.js'))
 
 //
 app.listen(port, () => {
