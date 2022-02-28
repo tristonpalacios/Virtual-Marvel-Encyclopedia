@@ -8,7 +8,28 @@ https://developer.marvel.com/
 
 ### MVP
 
+1. Home Page
+    1. Search Bar(To search Heroes or villains)
+    2. Login Button
+    3. Collage of comics changing in background
+2. Sign Up Page
+3. User account Page
+    1. List of favorite heroes
+4. Hero/Villain List of search Results Page
+5. Hero/Villain Summary Page
+
+
+
 ### User Stories
+I want to look up any Marvel Character
+
+I want to create an account
+
+I want to look up a Marvel Character and see a list of all characters and then select the one I want
+
+I want to get comic reccomendations for each character
+
+I want to save all of my favorite Heroes or Villains to my account
 
 ### Installation Instructions
 
@@ -22,6 +43,8 @@ https://developer.marvel.com/
 
 ### Sources
 
+Marvel API - https://developer.marvel.com/
+
 ### Post-project reflections
 
 
@@ -29,4 +52,4 @@ https://developer.marvel.com/
 
 ## ERDs 
 
-![an ERD of my project](./ERD.drawio.png)
+![an ERD of my project](Diagram.drawio.png)
