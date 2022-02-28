@@ -13,10 +13,25 @@ https://developer.marvel.com/
     2. Login Button
     3. Collage of comics changing in background
 2. Sign Up Page
+    1. Email
+    2. Password
 3. User account Page
-    1. List of favorite heroes
+    1. List of favorite heroes/villains
+        1. Summary of hero
+        2. Photo of hero
+        3. Link to hero page
 4. Hero/Villain List of search Results Page
+    1. List of all search results
+        1. Link to results full page
+        2. summary of result
+        3. Photo of result
 5. Hero/Villain Summary Page
+    1. Hero Photos (self rotating or click through)
+    2. Summary of hero
+    3. Creator of Hero
+    4. Reccommended comics
+    5. Hero Stats
+    6. Hero relationships
 
 
 
@@ -39,6 +54,10 @@ I want to save all of my favorite Heroes or Villains to my account
 
 ### wireframe
 ![Wireframe of my project](./readmePhotos/Wireframe.png)
+
+### Stretch Goals
+1. Custom art for a few select heroes
+2. Searching Animation
 
 ### Restful routing
 
