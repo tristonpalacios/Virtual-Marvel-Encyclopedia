@@ -4,6 +4,7 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const cryptojs = require('crypto-js')
 require('dotenv').config()
+const axios = require('axios')
 
 
 
@@ -13,6 +14,18 @@ router.get('/profile', (req,res)=>{
 router.get('/new', (req,res)=>{
 res.render('users/new.ejs')
 })
+
+router.get('/marvel', async (req,res)=>{
+    try {
+        const response = await axios.get(`https://gateway.marvel.com:443/v1/public/characters?name=Spider-Man&apikey=b9a601cf3f97ca652244480a5bb1f914
+        `)
+        res.render('users/results.ejs', {movies: response.code})
+      } catch (error) {
+        console.log(error)
+      }
+})
+
+
 
 router.post('/', async (req,res)=>{
    const[newUser,created] = await db.user.findOrCreate({

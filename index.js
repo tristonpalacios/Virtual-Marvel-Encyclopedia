@@ -5,6 +5,7 @@ require('dotenv').config()//allow access to env vars
 const db = require('./models')
 const cookieParser = require('cookie-parser')
 const cryptoJs = require('crypto-js')
+const axios = require('axios')
 
 const app = express()//create instance of express
 //check for env port if not, use 3000
