@@ -61,6 +61,20 @@ I want to save all of my favorite Heroes or Villains to my account
 
 ### Restful routing
 
+| **URL** | **HTTP Verb** |
+|------------|-------------|
+|/         | GET   
+|/home      | GET
+|/search    | GET
+|/results    | GET
+|/character   | GET 
+|/faves        | POST
+|/faves        | GET
+| /users/new         | GET         
+| /users/login          | GET  
+| /users/login          | POST 
+| /users/logout          | POST 
+
 ### Sources
 
 Marvel API - https://developer.marvel.com/
