@@ -6,6 +6,19 @@ const db = require('./models')
 const cookieParser = require('cookie-parser')
 const cryptoJs = require('crypto-js')
 const axios = require('axios')
+const { createHash } = require('crypto')
+
+const options = {
+    headers: {
+      'Accept': 'application/json'
+    }
+  }
+
+const pubKey = process.env.Public_API_KEY
+const privKey = process.env.Private_API_KEY
+const ts = new Date()
+const reqHash = createHash('md5').update(ts + privKey + pubKey).digest('hex')
+console.log(reqHash)
 
 const app = express()//create instance of express
 //check for env port if not, use 3000
@@ -37,12 +50,31 @@ app.use(async(req,res,next)=>{
 //CONTROLLER
 app.use('/users', require('./controllers/users.js'))
 
-
-// GET / - display all articles and their authors
-app.get('/', (req, res) => {
-  res.render(`home.ejs`)
-  
+app.get('/search', (req, res) => {
+    try {
+        axios.get(`http://gateway.marvel.com/v1/public/characters?nameStartsWith=${req.query.marvelSearch}&offset=0&ts=${ts}&apikey=${pubKey}&hash=${reqHash}`, options)
+  .then(response => {data = (response.data.data.results)
+    res.render(`home.ejs`,{results:data})
+    console.log(data)
+        console.log(req.query.marvelSearch)
+    })  
+        
+    } catch (error) {
+        console.log(error)
+    }
+    
 })
+
+app.get('/details/:id', (req, res) => {
+    console.log(req.params.id)
+    charId=req.params.id
+    axios.get(`http://gateway.marvel.com/v1/public/characters/${charId}?&limit=1&offset=0&ts=${ts}&apikey=${pubKey}&hash=${reqHash}`, options)
+      .then(response => {data = (response)
+        console.log(data.data.data.results[0])
+        res.render('detail.ejs', { results:data.data.data.results[0]})
+      })
+      .catch(console.log)
+  })
 
 //CONTROLLER
 app.use('/users', require('./controllers/users.js'))

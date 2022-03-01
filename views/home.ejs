@@ -1,1 +1,24 @@
-<h2>This is the homepage</h2>
+<h1>Search</h1>
+<p>Search for a character below...</p>
+
+<form method="GET" action="/search">
+  <lable for="marvelSearch"></lable>
+  <input type="text"  id="marvelSearch" name="marvelSearch" placeholder="Daredevil"/>
+  <input type="submit" />
+</form>
+
+<h1>
+    <% results.forEach(elem => { %>
+        <div>
+          <h8><%= elem.name %></h8>
+          <h8><%= elem.id %></h8>
+
+          <br>
+          <img src="<%= `${elem.thumbnail.path}/standard_amazing.jpg`%>" style="border: 10px solid black; border-radius: 50%; height: 350px; width: 350px;">
+          <a href="/details/<%= elem.id %>">more info</a>
+        </div>
+      <% }) %>
+      
+</h1>
+
+<!-- ${results.thumbnail.path} -->
