@@ -69,10 +69,44 @@ app.get('/details/:id', (req, res) => {
     console.log(req.params.id)
     charId=req.params.id
     axios.get(`http://gateway.marvel.com/v1/public/characters/${charId}?&limit=1&offset=0&ts=${ts}&apikey=${pubKey}&hash=${reqHash}`, options)
-      .then(response => {data = (response)
-        console.log(data.data.data.results[0])
-        res.render('detail.ejs', { results:data.data.data.results[0]})
+      .then(response => {dataFirst = (response)
+        // console.log(dataFirst.data.data.results[0])
       })
+      axios.get(`http://gateway.marvel.com/v1/public/characters/${charId}/comics?&offset=4&ts=${ts}&apikey=${pubKey}&hash=${reqHash}`, options)
+      .then(response => {data = (response)
+        // console.log(data.data.data.results[0].images)
+        let comicData = data.data.data.results
+        
+        // console.log(comicData)
+        let comicPics = []
+        let comicNames=[]
+        let comicCreators = []
+        for(let i=0;i<comicData.length;i++ ){
+            comicPicsUrls = comicData[i].images[0]
+            // console.log(comicPicsUrls)
+            const comicPicArray = new Array(comicPicsUrls)
+            // console.log(comicPicArray[0])
+            comicPics.push(comicPicArray[0])
+        }
+        for(let i=0;i<comicData.length;i++ ){
+            comicPicsUrls = comicData[i].images[0]
+            // console.log(comicPicsUrls)
+            const comicPicArray = new Array(comicPicsUrls)
+            // console.log(comicPicArray[0])
+            comicNames.push(comicPicArray[0])
+        }
+        for(let i=0;i<comicData.length;i++ ){
+            comicPicsUrls = comicData[i].images[0]
+            // console.log(comicPicsUrls)
+            const comicPicArray = new Array(comicPicsUrls)
+            // console.log(comicPicArray[0])
+            comicCreators.push(comicPicArray[0])
+        }
+        // console.log(comicPics[2])
+        // console.log(photoArray)
+        res.render('detail.ejs', { results:dataFirst.data.data.results[0],comicPhotos:comicPics}) 
+      })
+
       .catch(console.log)
   })
 

@@ -2,6 +2,15 @@
 <img src="<%= `${results.thumbnail.path}/landscape_incredible.jpg`%>">
 <h1><%= results.description%></h1>
 
+<h1>
+    <% comicPhotos.forEach(elem => { %>
+        <div>
+          <img src="<%= `${elem.path}/portrait_large.jpg`%>">
+        </div>
+      <% }) %>
+      
+</h1>
+
           
 
 
