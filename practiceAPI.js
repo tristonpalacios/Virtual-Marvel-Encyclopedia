@@ -49,13 +49,13 @@ axios.get(`http://gateway.marvel.com/v1/public/characters/1009368/comics?&offset
       .then(response => {data = (response)
         // console.log(data.data.data.results[0].images)
         let comicData = data.data.data.results
-        // console.log(comicData)
+        console.log(comicData[0].events)
     
         // let comicPics = []
-        for(let i=0;i<comicData.length;i++ ){
-            console.log(comicData[i].creators.items[0].name)
-            console.log(comicData[i].series.name)
-        }
+        // for(let i=0;i<comicData.length;i++ ){
+        //     console.log(comicData[i].creators.items[0].name)
+        //     console.log(comicData[i].series.name)
+        // }
         // console.log(comicPics[3])
     //     for(let i=0;i<picData.length;i++){
     //         console.log(picData[i].path)

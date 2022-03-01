@@ -3,9 +3,13 @@
 <h1><%= results.description%></h1>
 
 <h1>
-    <% comicPhotos.forEach(elem => { %>
+    <% comicData.forEach(elem => { %>
         <div>
-          <img src="<%= `${elem.path}/portrait_large.jpg`%>">
+          <img src="<%= `${elem.images[0].path}/portrait_large.jpg`%>">
+          <p>Title:<%= elem.title%> </p>
+          <p>Series:<%= elem.series.name%> </p>
+          <p>Author:<%= elem.creators.items[0].name%> </p>
+          <p>Price:<%= elem.prices[0].price%> </p>
         </div>
       <% }) %>
       

@@ -79,8 +79,6 @@ app.get('/details/:id', (req, res) => {
         
         // console.log(comicData)
         let comicPics = []
-        let comicNames=[]
-        let comicCreators = []
         for(let i=0;i<comicData.length;i++ ){
             comicPicsUrls = comicData[i].images[0]
             // console.log(comicPicsUrls)
@@ -88,23 +86,9 @@ app.get('/details/:id', (req, res) => {
             // console.log(comicPicArray[0])
             comicPics.push(comicPicArray[0])
         }
-        for(let i=0;i<comicData.length;i++ ){
-            comicPicsUrls = comicData[i].images[0]
-            // console.log(comicPicsUrls)
-            const comicPicArray = new Array(comicPicsUrls)
-            // console.log(comicPicArray[0])
-            comicNames.push(comicPicArray[0])
-        }
-        for(let i=0;i<comicData.length;i++ ){
-            comicPicsUrls = comicData[i].images[0]
-            // console.log(comicPicsUrls)
-            const comicPicArray = new Array(comicPicsUrls)
-            // console.log(comicPicArray[0])
-            comicCreators.push(comicPicArray[0])
-        }
         // console.log(comicPics[2])
         // console.log(photoArray)
-        res.render('detail.ejs', { results:dataFirst.data.data.results[0],comicPhotos:comicPics}) 
+        res.render('detail.ejs', { results:dataFirst.data.data.results[0],comicPhotos:comicPics,comicData:comicData}) 
       })
 
       .catch(console.log)
