@@ -1,0 +1,3 @@
+sequelize model:create --name users_heroes  --attributes userId:integer,heroId:integer
+sequelize model:create --name comments  --attributes userId:integer,heroId:integer,body:string
+sequelize model:create --name heroes  --attributes name:string,more_url:string,photo:string

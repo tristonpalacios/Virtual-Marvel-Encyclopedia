@@ -72,7 +72,7 @@ router.post('/login', async (req,res)=>{
 router.get('/logout', (req,res)=>{
     console.log('Logging out')
     res.clearCookie('userId')
-    res.redirect('/')
+    res.redirect('/home')
 })
 
 

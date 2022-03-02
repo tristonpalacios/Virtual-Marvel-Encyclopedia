@@ -39,6 +39,7 @@ app.use(async(req,res,next)=>{
     const decryptedIdString = decryptedId.toString(cryptoJs.enc.Utf8)
     //querying the db for the user with that id
     const user = await db.user.findByPk(decryptedIdString)
+    
     //assigning the found user to res.locals.user in the routes, and the user in the ejs
     res.locals.user=user
        
@@ -93,6 +94,27 @@ app.get('/details/:id', (req, res) => {
 
       .catch(console.log)
   })
+
+app.post("/", (req, res) => {
+    // TODO: Get form data and add a new record to DB
+    db.hero
+        .findOrCreate({
+            where: {
+                name: req.body.name,
+                photo: req.body.photo,
+                more_url: req.body.url
+            }
+        })
+        .then(([hero,Created]) => {
+          res.locals.user.addHero(hero)
+            // console.log(`the new fave is:`, newFave);
+            res.redirect(`/search`)
+        })
+        .catch((err) => {
+            console.log("error", err);
+            
+        });
+});
 
 //CONTROLLER
 app.use('/users', require('./controllers/users.js'))

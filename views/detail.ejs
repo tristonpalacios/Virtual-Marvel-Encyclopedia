@@ -1,19 +1,28 @@
 <h1><%= results.name%></h1>
-<img src="<%= `${results.thumbnail.path}/landscape_incredible.jpg`%>">
+<img src="<%= `${results.thumbnail.path}/portrait_incredible.jpg`%>">
 <h1><%= results.description%></h1>
+
+<form method="POST" action="/">
+  <input hidden type="text" name="name" value="<%= results.name %>" >
+  <input hidden type="text" name="url" value="<%= `/details/${results.id}` %>" >
+  <input hidden type="text" name="photo" value="<%= `${results.thumbnail.path}/portrait_incredible.jpg` %>" >
+  <button class="btn btn-primary" type="submit">Add to Favorites</button>
+</form>
 
 <h1>
     <% comicData.forEach(elem => { %>
         <div>
-          <img src="<%= `${elem.images[0].path}/portrait_large.jpg`%>">
+          <img src="<%=`${elem.images[0].path}/portrait_incredible.jpg`%>">
           <p>Title:<%= elem.title%> </p>
           <p>Series:<%= elem.series.name%> </p>
           <p>Author:<%= elem.creators.items[0].name%> </p>
-          <p>Price:<%= elem.prices[0].price%> </p>
+          <p>Price: $<%= elem.prices[0].price%> </p>
+          
         </div>
       <% }) %>
       
 </h1>
+
 
           
 
