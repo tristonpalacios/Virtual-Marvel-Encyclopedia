@@ -21,7 +21,10 @@ res.render('users/new.ejs')
 
 router.post('/', async (req,res)=>{
    const[newUser,created] = await db.user.findOrCreate({
-        where:{email: req.body.email}
+        where:{
+            email: req.body.email,
+            userName: req.body.userName,
+        }
     })
     if(!created){
         console.log('User already exist')
@@ -42,7 +45,7 @@ router.post('/', async (req,res)=>{
         //key value pairs
         res.cookie('userId',encryptedUserIdString)
         //redirect back to the home page
-        res.redirect('/')
+        res.redirect('/login')
     }
     
 })
@@ -64,7 +67,7 @@ router.post('/login', async (req,res)=>{
         const encryptedUserId = cryptojs.AES.encrypt(user.id.toString(),process.env.SECRET)
         const encryptedUserIdString = encryptedUserId.toString()
         res.cookie('userId',encryptedUserIdString)
-        res.redirect('/')
+        res.redirect('/search')
 
    }
 })
@@ -72,7 +75,7 @@ router.post('/login', async (req,res)=>{
 router.get('/logout', (req,res)=>{
     console.log('Logging out')
     res.clearCookie('userId')
-    res.redirect('/home')
+    res.redirect('/search')
 })
 
 

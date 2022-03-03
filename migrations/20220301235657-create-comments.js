@@ -17,6 +17,9 @@ module.exports = {
       body: {
         type: Sequelize.STRING
       },
+      userName: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

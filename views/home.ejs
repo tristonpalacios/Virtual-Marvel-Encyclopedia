@@ -15,7 +15,13 @@
 
           <br>
           <img src="<%= `${elem.thumbnail.path}/standard_amazing.jpg`%>" style="border: 10px solid black; border-radius: 50%; height: 350px; width: 350px;">
-          <a href="/details/<%= elem.id %>">more info</a>
+          <form method="POST" action="/">
+            <input hidden type="text" name="name" value="<%= elem.name %>" >
+            <input hidden type="text" name="url" value="<%= `/details/${elem.id}` %>" >
+            <input hidden type="text" name="photo" value="<%= `${elem.thumbnail.path}/portrait_incredible.jpg` %>" >
+            <input hidden type="text" name="marvelKey" value="<%= elem.id%>" >
+            <button class="btn btn-primary" type="submit">More Info</button>
+          </form>
         </div>
       <% }) %>
       

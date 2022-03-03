@@ -17,6 +17,9 @@ module.exports = {
       photo: {
         type: Sequelize.STRING
       },
+      marvelId: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

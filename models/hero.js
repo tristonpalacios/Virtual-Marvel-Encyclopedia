@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   hero.init({
     name: DataTypes.STRING,
     more_url: DataTypes.STRING,
-    photo: DataTypes.STRING
+    photo: DataTypes.STRING,
+    marvelId: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'hero',
