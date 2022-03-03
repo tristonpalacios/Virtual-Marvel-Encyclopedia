@@ -1,15 +1,11 @@
 <h1><%= results.name%></h1>
 <img src="<%= `${results.thumbnail.path}/standard_fantastic.jpg`%>" style="border: 10px solid black; border-radius: 50%;">
-<h1>Summary: <br><%= results.description%></h1>
+<% if(results.description){ %>
+<h1>Summary: <br><%= %></h1>
+<%}%>
 <% if(user){ %>
-  <form method="POST" action="/">
-    <input hidden type="text" name="name" value="<%= results.name %>" >
-    <input hidden type="text" name="url" value="<%= `/details/${results.id}` %>" >
-    <input hidden type="text" name="photo" value="<%= `${results.thumbnail.path}/portrait_incredible.jpg` %>" >
-    <input hidden type="text" name="marvelKey" value="<%= results.id%>" >
-    <button class="btn btn-primary" type="submit">Add to Favorites</button>
-  </form>
   
+  <div>
   <form method="POST" action="/genComment">
     <lable for="genComment"></lable>
     <input hidden type="text" name="name" value="<%= results.name %>" >
@@ -19,6 +15,15 @@
     <input type="text"  id="genComment" name="genComment" placeholder="leave comment here"/>
     <input type="submit" />
   </form>
+  </div>
+    <form method="POST" action="/fave">
+      <input hidden type="text" name="name" value="<%= results.name %>" >
+      <input hidden type="text" name="url" value="<%= `/details/${results.id}` %>" >
+      <input hidden type="text" name="photo" value="<%= `${results.thumbnail.path}/portrait_incredible.jpg` %>" >
+      <input hidden type="text" name="marvelKey" value="<%= results.id%>" >
+      <button class="btn btn-primary" type="submit">Add to Favorites</button>
+    </form>
+  
 <% }else{ %> 
 <a href="/users/new">Sign Up to add favorites or join the discussion</a>
 
@@ -28,7 +33,8 @@
     <% commentData.forEach(elem => { %>
       <div>
         
-        <p><%=elem.userName%> said: <%= elem.body%>   </p>
+        <p><%=elem.userName%> said: <%= elem.body%>.  </p>
+        
        
   
         
@@ -46,7 +52,9 @@
   <% if(comicData){ %>
     <% comicData.forEach(elem => { %>
         <div>
-          <img src="<%=`${elem.images[0].path}/portrait_incredible.jpg`%> ">
+          <% if(elem.images[0]){ %>
+            <img src="<%=`${elem.images[0].path}/portrait_incredible.jpg`%> ">
+            <% }%>
           <p>Title:<%= elem.title%> </p>
           <% if(elem.creators.items[0]){ %>
           <p>Author:<%= elem.creators.items[0].name%> </p>

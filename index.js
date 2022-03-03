@@ -117,8 +117,6 @@ app.get("/details/:id", async (req, res) => {
     where: { marvelId: req.params.id },
   });
   let comData = await foundHero.getComments();
-  console.log(foundHero)
-  console.log(req.params.id);
   charId = req.params.id;
   axios
     .get(
@@ -167,6 +165,46 @@ app.get("/details/:id", async (req, res) => {
 });
 //
 app.post("/", async (req, res) => {
+  // TODO: Get form data and add a new record to DB
+  db.hero
+    .findOrCreate({
+      where: {
+        marvelId: req.body.marvelKey,
+        name: req.body.name,
+        photo: req.body.photo,
+        more_url: req.body.url,
+      },
+    })
+    .then(([hero, Created]) => {
+      // console.log(`the new fave is:`, newFave);
+      res.redirect(`${req.body.url}`);
+    })
+    .catch((err) => {
+      console.log("error", err);
+    });
+});
+
+app.post("/", async (req, res) => {
+  // TODO: Get form data and add a new record to DB
+  db.hero
+    .findOrCreate({
+      where: {
+        marvelId: req.body.marvelKey,
+        name: req.body.name,
+        photo: req.body.photo,
+        more_url: req.body.url,
+      },
+    })
+    .then(([hero, Created]) => {
+      // console.log(`the new fave is:`, newFave);
+      res.redirect(`${req.body.url}`);
+    })
+    .catch((err) => {
+      console.log("error", err);
+    });
+});
+
+app.post("/fave", async (req, res) => {
   // TODO: Get form data and add a new record to DB
   db.hero
     .findOrCreate({
