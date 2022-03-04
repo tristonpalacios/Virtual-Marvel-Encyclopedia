@@ -1,12 +1,91 @@
-<form action="/users" method="POST">
-    <label for="email">Email:</label>
+<link rel="stylesheet" href="/public/css/styleSignIn.css" />
+<body class="text-center">
+  <!-- <form class="form-signin" action="/users" method="POST"> -->
+  <!-- <div class="form-floating">
+    <label for="email">Email:<i class="bi bi-envelope-heart-fill"></i></label>
     <input type="email" name="email" id="email">
-    
+    </div>
+    <div class="form-floating">
     <label for="userName">User Name:</label>
     <input type="text" name="userName" id="userName">
-
+    </div>
+    <div class="form-floating">
     <label for="email">Password:</label>
     <input type="password" name="password" id="password">
-    
+    </div>
     <button type="submit">Sign Up</button>
 </form>
+</body> -->
+
+  <section class="h-100 gradient-form" style="background-color: #eee">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="card-body p-md-5 mx-md-4">
+                  <div class="text-center">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/2560px-Marvel_Logo.svg.png"
+                      style="width: 185px"
+                      alt="logo"
+                    />
+                    <h4 class="mt-1 mb-5 pb-1">
+                      Welcome to the Virtual Marvel Encyclopedia
+                    </h4>
+                  </div>
+
+                  
+                    <p>Sign up for a new account</p>
+
+                <form class="form-signin" action="/users" method="POST">
+
+                    <div class="form-outline mb-4">
+                      <input type="text" name="userName" id="userName" class="form-control" />
+                      <label class="form-label" for="userName">Username</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                      <input type="password" name="email" id="email" class="form-control" />
+                      <label class="form-label" for="email">Email</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                      <input
+                        type="password"
+                        id="password"
+                        class="form-control" name="password"
+                      />
+                      <label class="form-label" for="password">Password</label>
+                    </div>
+
+                    <div class="text-center pt-1 mb-5 pb-1">
+                      <button
+                        class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                        type="sumbit"
+                      >
+                        Sign Up
+                      </button>
+                    </div>
+                </form>
+                  <div
+                    class="d-flex align-items-center justify-content-center pb-4"
+                  >
+                    <p class="mb-0 me-2">Don't have an account?</p>
+                    <!-- <button type="submit" class="btn btn-outline-danger">
+                      Create new
+                    </button> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>

@@ -106,3 +106,35 @@ axios.get(`http://gateway.marvel.com/v1/public/characters/1009368/comics?&offset
 
 
 
+// <% if(commentData){ %>
+//   <h1>Comments:
+//     <% commentData.forEach(elem => { %>
+//       <div>
+        
+//         <p><%=elem.userName%> said: <%= elem.body%>.  </p>
+        
+       
+  
+        
+        
+//       </div>
+//       <% }) %>
+//   </h1>
+//   <% }else{ %>
+//   <p>Be the first to leave a comment!</p>
+  
+//   <% } %>
+
+
+// <h1></h1>
+
+
+// <div>
+//           <% if(elem.images[0]){ %>
+//             <img src="<%=`${elem.images[0].path}/portrait_incredible.jpg`%> ">
+//             <% }%>
+//           <p>Title:<%= elem.title%> </p>
+//           <% if(elem.creators.items[0]){ %>
+//           <p>Author:<%= elem.creators.items[0].name%> </p>
+//           <% }%>
+//           <p>Price: $<%= elem.prices[0].price%> </p>

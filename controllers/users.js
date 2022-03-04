@@ -45,7 +45,7 @@ router.post('/', async (req,res)=>{
         //key value pairs
         res.cookie('userId',encryptedUserIdString)
         //redirect back to the home page
-        res.redirect('/login')
+        res.redirect('users/login')
     }
     
 })

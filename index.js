@@ -10,6 +10,7 @@ const users_heroes = require("./models/users_heroes");
 const hero = require("./models/hero");
 const comment = require("./models/comment");
 
+
 const options = {
   headers: {
     Accept: "application/json",
@@ -27,8 +28,8 @@ const reqHash = createHash("md5")
 const app = express(); //create instance of express
 //check for env port if not, use 3000
 const port = process.env.PORT || 3000;
-
-//middlewar
+app.use('/public',express.static('public'))
+//middleware
 app.set("view engine", "ejs"); //set the view view engine to ejs
 app.use(cookieParser()); // gives access to req.cookies
 app.use(express.urlencoded({ extended: false })); //makes req.body work
@@ -55,6 +56,7 @@ app.use(async (req, res, next) => {
 
 //CONTROLLER
 app.use("/users", require("./controllers/users.js"));
+
 
 app.get("/search", (req, res) => {
   try {
@@ -265,6 +267,7 @@ app.post("/genComment", async (req, res) => {
 
 //CONTROLLER
 app.use("/users", require("./controllers/users.js"));
+
 
 //
 app.listen(port, () => {
