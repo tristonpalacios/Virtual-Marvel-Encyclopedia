@@ -57,7 +57,13 @@ app.use(async (req, res, next) => {
 //CONTROLLER
 app.use("/users", require("./controllers/users.js"));
 
-
+app.get("/", (req, res) => {
+  try {
+    res.redirect(`/search`)
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 
 app.get("/search", (req, res) => {
