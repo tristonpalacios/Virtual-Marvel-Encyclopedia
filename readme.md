@@ -86,6 +86,9 @@ Marvel API - https://developer.marvel.com/
 
 ### Post-project reflections
 
+1. Better research and investigate APIs before use. Marvel API isnt up to date and is missing a lot of info I had intended to include in the site. 
+2. Lay out style guidelines before creation. Fonts, colors, and general appearance was hard to make feel natural once site had already taken form. 
+
 
 
 
