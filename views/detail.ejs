@@ -1,13 +1,15 @@
-<link rel="stylesheet" href="/public/css/styleDetail.css" />
 <%- include('./partials/head.ejs'); %>
-<h1 id="heroName"><%= results.name%></h1>
+<link rel="stylesheet" href="/public/css/styleDetail.css" />
 
+<h1 id="heroName"><%= results.name%></h1>
+<div id="coverScreen"   class="LockOn">
 <div class="PD">
 
   
   <img class="gradient-border hero" src="<%= `${results.thumbnail.path}/standard_fantastic.jpg`%>" id="box" >
   <% if(results.description){ %>
   <h1 id="description"><br><%= results.description%></h1>
+  <%}%>
 
 </div>
 <form style="text-align: center;" method="POST" action="/fave">
@@ -15,10 +17,15 @@
   <input hidden type="text" name="url" value="<%= `/details/${results.id}` %>" >
   <input hidden type="text" name="photo" value="<%= `${results.thumbnail.path}/portrait_incredible.jpg` %>" >
   <input hidden type="text" name="marvelKey" value="<%= results.id%>" >
-  <button class="btn btn-primary" style="background-color: red; border: solid red;" type="submit">Add to Favorites</button>
+  <% if(favData.heroId === results.id){ %>
+    <p>Favorited! </p>
+    <% }else{ %>
+      <button class="btn btn-primary" style="background-color: red; border: solid red;" type="submit">Add to Favorites</button>
+      <% } %>
+ 
 </form>
 
-<%}%>
+
 
 <% if(commentData){ %>
   <% commentData.forEach(elem => { %>
@@ -61,16 +68,18 @@
     
   
 <% }else{ %> 
-<a href="/users/new">Sign Up to add favorites or join the discussion</a>
+
 
 <% } %>
 
 
 
   <h1 style="text-align: center;" >Featured In:</h1>
+
   <% if(comicData){ %>
     <% comicData.forEach(elem => { %>
-        <div class="scene">
+
+        <div class="scene" style="text-align: center;" >
           <div class="card">
             <div class="card__face card__face--front">
               <img src="<%=`${elem.images[0].path}/portrait_incredible.jpg`%>" />
@@ -78,13 +87,13 @@
             <div class="card__face card__face--back">
               <p class="backtext">Title:<%= elem.title%> </p>
               <% if(elem.creators.items[0]){ %>
-              <p class="backtext">Author:<%= elem.creators.items[0].name%> </p>
+              <p class="backtext">Author: <%= elem.creators.items[0].name%> </p>
               <% }%>
               <p class="backtext">Price: $<%= elem.prices[0].price%> </p></h3>i</p>
             </div>
           </div>
-          </div>
-          
+      </div>
+     
              
           
         
@@ -95,10 +104,7 @@
         <% } %>
       
 
-
-
-          
-
+      </div>
 
 
 

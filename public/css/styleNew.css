@@ -1,0 +1,19 @@
+.gradient-custom-2 {
+    background-image: url('https://i.pinimg.com/originals/ea/a4/c9/eaa4c974777e8c2d2759fca8501bcfa3.gif');
+
+    background-size: contain ;
+
+  }
+  
+  @media (min-width: 768px) {
+    .gradient-form {
+      height: 100vh !important;
+    }
+  }
+  @media (min-width: 769px) {
+    .gradient-custom-2 {
+      border-top-right-radius: .3rem;
+      border-bottom-right-radius: .3rem;
+    }
+  
+}

@@ -66,9 +66,9 @@ app.get("/", (req, res) => {
 })
 
 
-app.get("/search", (req, res) => {
+app.get("/search", async (req, res) => {
   try {
-    axios
+    await axios
       .get(
         `http://gateway.marvel.com/v1/public/characters?nameStartsWith=${req.query.marvelSearch}&offset=0&ts=${ts}&apikey=${pubKey}&hash=${reqHash}`,
         options
@@ -103,8 +103,12 @@ app.get("/favorites", async (req, res) => {
   }
 });
 
-app.get("/search", (req, res) => {
+app.get("/search", async (req, res) => {
   try {
+    const foundUser = await db.user.findOne({
+      where: { id: res.locals.user.id },
+    })
+    const data = await foundUser.getHeros();
     axios
       .get(
         `http://gateway.marvel.com/v1/public/characters?nameStartsWith=${req.query.marvelSearch}&offset=0&ts=${ts}&apikey=${pubKey}&hash=${reqHash}`,
@@ -128,7 +132,7 @@ app.get("/details/:id", async (req, res) => {
   });
   let comData = await foundHero.getComments();
   charId = req.params.id;
-  axios
+  await axios
     .get(
       `http://gateway.marvel.com/v1/public/characters/${charId}?&limit=1&offset=0&ts=${ts}&apikey=${pubKey}&hash=${reqHash}`,
       options
@@ -157,6 +161,7 @@ app.get("/details/:id", async (req, res) => {
         // console.log(comicPicArray[0])
         comicPics.push(comicPicArray[0]);
       }
+      
 
       // console.log(comicPics[2])
       // console.log(photoArray)
@@ -165,6 +170,7 @@ app.get("/details/:id", async (req, res) => {
         comicPhotos: comicPics,
         comicData: comicData,
         commentData: comData,
+        favData:data,
         
         
       });

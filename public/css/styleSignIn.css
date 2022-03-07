@@ -1,5 +1,6 @@
 .gradient-custom-2 {
   background-image: url('https://images-na.ssl-images-amazon.com/images/I/A1nNEGUxg2L.jpg');
+  background-size: 500px 750px;
   background-size: contain;
 }
 
@@ -14,3 +15,4 @@
     border-bottom-right-radius: .3rem;
   }
 
+}

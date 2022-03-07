@@ -6,6 +6,7 @@ body {
     padding-top: 20px;
     display: inline-block;
     justify-content: center;
+    text-align: center;
     align-items: center;
     height: 100vh;
     background-color: white;
@@ -15,7 +16,6 @@ body {
   .scene {
     width: 240px;
     display: inline-block;
-    text-align: center;
     grid-template-columns: 3;
     justify-content: space-between;
     perspective: 800px;
@@ -114,6 +114,8 @@ body {
 .comments{
   background-color: white;
   border: 1px solid white;
+  grid-column: 1;
+  grid-row: 4;
   border-radius: 5%;
   margin: auto;
   margin-bottom: 10px;
@@ -130,4 +132,12 @@ body {
 margin-bottom: 0px;
 }
 
+.content {display:none;}
+.preload { 
+    width:100px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
 

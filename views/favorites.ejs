@@ -1,19 +1,94 @@
-<% results.forEach(elem => { %>
-    <div>
-      
-      <h3><%= elem.name%> </h3>
-      <img src="<%=elem.photo%>" alt="">
-      <a href="<%=elem.more_url%>">More Info</a>
-      <form method="POST" action="/comment">
-        <lable for="commentData"></lable>
-        <input hidden type="text" name="heroId" value="<%= `${elem.id}` %>" >
-        <input type="text"  id="commentData" name="commentData" placeholder="leave comment here"/>
-        <input type="submit" />
-      </form>
+<link rel="stylesheet" href="/public/css/styleSearch.css" />
+<%- include('./partials/head.ejs'); %>
 
+<h1 style="text-align: center; padding-top: 100px; color: white;">Your Favorites!</h1>
       
-      
+      <html class="wrapper">
+  
+
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-lg-12 card-margin">
+          <div class="card search-form">
+              <div class="card-body p-0">
+                  <form id="search-form">
+                      <div class="row">
+                          <div class="col-12">
+                              <div class="row no-gutters">
+                                  <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+          <div class="col-12">
+              <div class="card card-margin">
+                  <div class="card-body">
+                      <div class="row search-body">
+                          <div class="col-lg-12">
+                              <div class="search-result">
+                                  <div class="result-header">
+                                      <div class="row">
+                                          <div class="col-lg-6">
+                                              
+                                          </div>
+                                          <div class="col-lg-6">
+                                              <div class="result-actions">
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="result-body">
+                                      <div class="table-responsive">
+                                          <table class="table widget-26">
+                                              <tbody>
+                                                <% results.forEach(elem => { %>
+                                                  <tr>
+                                                      <td>
+                                                          <div class="widget-26-job-emp-img">
+                                                              <img src="<%= `${elem.photo}`%>" alt="hero Img"  style="width: 200px; height: 200px; padding: auto; margin: auto;"/>
+                                                          </div>
+                                                      </td>
+                                                      <td>
+                                                          <div class="widget-26-job-title">
+                                                              <p style="font-size: 100px;"><%= elem.name %></p>
+                                                              <a href="<%=elem.more_url%>" style="font-size: 25px;">More Info</a>
+                                                          </div>
+                                                      </td>
+                                                      <td>
+                                                        
+                                                          
+                                                      </td>
+
+                                                        </form>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                  </tr>
+                                                  </tr>
+                                                  <% }) %>
+                                              </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</html>
       
     </div>
-  <% }) %>
+ 
 
