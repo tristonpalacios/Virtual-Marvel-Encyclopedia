@@ -67,6 +67,24 @@ app.get("/", (req, res) => {
   }
 })
 
+app.put("/updatename", async (req, res) => {
+  try {
+    await db.user.update(
+      {
+        userName: req.body.name
+      },
+      {
+        where: {
+          id: req.body.userId
+        },
+      }
+    );
+    res.redirect("/favorites");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 
 app.get("/search", async (req, res) => {
   try {
@@ -236,23 +254,7 @@ app.post("/", async (req, res) => {
     });
 });
 
-// Edit users name
-app.put("/:id", async (req, res) => {
-  try {
-    await db.user.update(
-      {
-        userName: req.body.name
-      },
-      {
-        where: {
-          id: req.params.id
-        },
-      }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-});
+
 
 
 app.post("/fave", async (req, res) => {

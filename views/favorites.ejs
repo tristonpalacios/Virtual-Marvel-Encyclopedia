@@ -1,12 +1,18 @@
 <link rel="stylesheet" href="/public/css/styleSearch.css" />
 <%- include('./partials/head.ejs'); %>
 
-<h1 style="text-align: center; padding-top: 100px; color: white;">Your Favorites!</h1>
+<h1 style="text-align: center; padding-top: 100px; color: white;"><%=user.userName%>'s Favorites!</h1>
+
       
       <html class="wrapper">
 
   
-
+        <form style="text-align: center;" action="/updatename/?_method=PUT" method="POST">
+          <input hidden type="text" name="userId" value="<%= user.id %>" >
+          <label class="fs-4" for='name'> Update Name</label>
+          <input type='text' name="name" />
+          <input type="submit" />
+        </form>
 
 
 <div class="container">
