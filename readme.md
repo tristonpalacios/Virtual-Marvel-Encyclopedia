@@ -54,6 +54,11 @@ https://virtual-marvel-encyclopedia.herokuapp.com/
 
 ### Approach
 
+### Code Highlights
+![Hash Code Highlight](/hashHighlight.png)
+
+
+
 ### wireframe
 ![Wireframe of my project](./readmePhotos/Wireframe.png)
 

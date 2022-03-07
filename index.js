@@ -9,8 +9,7 @@ const { createHash } = require("crypto");
 const users_heroes = require("./models/users_heroes");
 const hero = require("./models/hero");
 const comment = require("./models/comment");
-const methodOverride = require('method-override');
-
+const methodOverride = require("method-override");
 
 const options = {
   headers: {
@@ -18,25 +17,26 @@ const options = {
   },
 };
 
+//Needed to get DATA from Marvel API. 
+// Creates an md5 hash of a timestamp,public api key, and private api key to get authorization to get data from the Marvel API.
 const pubKey = process.env.PUBLIC_API_KEY;
 const privKey = process.env.PRIVATE_API_KEY;
 const ts = new Date().getTime();
 const reqHash = createHash("md5")
   .update(ts + privKey + pubKey)
   .digest("hex");
-// console.log(reqHash)
 
 
 const app = express(); //create instance of express
 //check for env port if not, use 3000
 const port = process.env.PORT || 3000;
-app.use('/public',express.static('public'))
+app.use("/public", express.static("public"));
 //middleware
 app.set("view engine", "ejs"); //set the view view engine to ejs
 app.use(cookieParser()); // gives access to req.cookies
 app.use(express.urlencoded({ extended: false })); //makes req.body work
 app.use(ejsLayouts); //tell express to use ejs layouts
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 //CUSTOM LOGIN MIDDLEWARE
 app.use(async (req, res, next) => {
   if (req.cookies.userId) {
@@ -61,21 +61,22 @@ app.use("/users", require("./controllers/users.js"));
 
 app.get("/", (req, res) => {
   try {
-    res.redirect(`/users/login`)
+    res.redirect(`/users/login`);
   } catch (error) {
     console.log(error);
+    res.redirect('/users/login')
   }
-})
+});
 
 app.put("/updatename", async (req, res) => {
   try {
     await db.user.update(
       {
-        userName: req.body.name
+        userName: req.body.name,
       },
       {
         where: {
-          id: req.body.userId
+          id: req.body.userId,
         },
       }
     );
@@ -84,7 +85,6 @@ app.put("/updatename", async (req, res) => {
     console.log(err);
   }
 });
-
 
 app.get("/search", async (req, res) => {
   try {
@@ -126,7 +126,7 @@ app.get("/favorites", async (req, res) => {
 app.delete("/delete", async (req, res) => {
   try {
     const foundComment = await db.comment.findOne({
-      where: { id: req.body.comId},
+      where: { id: req.body.comId },
     });
     await foundComment.destroy();
     res.redirect(`/details/${req.body.detailId}`);
@@ -139,7 +139,7 @@ app.get("/search", async (req, res) => {
   try {
     const foundUser = await db.user.findOne({
       where: { id: res.locals.user.id },
-    })
+    });
     const data = await foundUser.getHeros();
     axios
       .get(
@@ -157,10 +157,7 @@ app.get("/search", async (req, res) => {
   }
 });
 
-
-
 app.get("/details/:id", async (req, res) => {
-
   const foundHero = await db.hero.findOne({
     where: { marvelId: req.params.id },
   });
@@ -195,7 +192,6 @@ app.get("/details/:id", async (req, res) => {
         // console.log(comicPicArray[0])
         comicPics.push(comicPicArray[0]);
       }
-      
 
       // console.log(comicPics[2])
       // console.log(photoArray)
@@ -204,14 +200,14 @@ app.get("/details/:id", async (req, res) => {
         comicPhotos: comicPics,
         comicData: comicData,
         commentData: comData,
-        favData:data,
-        
-        
+        favData: data,
       });
     })
-    
 
-    .catch(console.log);
+    .catch((error) => {
+      console.log(error);
+      res.redirect('/search');
+    });
 });
 //
 app.post("/", async (req, res) => {
@@ -253,9 +249,6 @@ app.post("/", async (req, res) => {
       console.log("error", err);
     });
 });
-
-
-
 
 app.post("/fave", async (req, res) => {
   // TODO: Get form data and add a new record to DB
@@ -318,7 +311,6 @@ app.post("/genComment", async (req, res) => {
 
 //CONTROLLER
 app.use("/users", require("./controllers/users.js"));
-
 
 //
 app.listen(port, () => {
