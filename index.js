@@ -17,8 +17,8 @@ const options = {
   },
 };
 
-const pubKey = process.env.Public_API_KEY;
-const privKey = process.env.Private_API_KEY;
+const pubKey = process.env.PUBLIC_API_KEY;
+const privKey = process.env.PRIVATE_API_KEY;
 const ts = new Date();
 const reqHash = createHash("md5")
   .update(ts + privKey + pubKey)
@@ -122,6 +122,31 @@ app.get("/search", async (req, res) => {
       });
   } catch (error) {
     console.log(error);
+  }
+});
+
+app.delete("/delete", async (req, res) => {
+  try {
+    // const foundHero = await db.hero.findOne({
+    //   where: { marvelId: req.params.id },
+    // });
+    // await foundHero.destroy();
+    // res.redirect("/favorites");
+  db.hero.findOrCreate({
+      where: {
+        marvelId: req.body.marvelKey,
+        name: req.body.name,
+        photo: req.body.photo,
+        more_url: req.body.url,
+      },
+    })
+    .then(([hero, Created]) => {
+      res.locals.user.destroy(hero);
+      // console.log(`the new fave is:`, newFave);
+      res.redirect(`/favorites`);
+    })
+  } catch (err) {
+    console.log(err);
   }
 });
 
