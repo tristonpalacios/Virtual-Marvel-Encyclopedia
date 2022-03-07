@@ -61,7 +61,7 @@ app.use("/users", require("./controllers/users.js"));
 
 app.get("/", (req, res) => {
   try {
-    res.redirect(`/search`)
+    res.redirect(`/login`)
   } catch (error) {
     console.log(error);
   }
