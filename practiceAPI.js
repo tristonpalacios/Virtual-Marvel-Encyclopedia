@@ -17,8 +17,8 @@ const options = {
   }
 }
 
-const pubKey = process.env.Public_API_KEY
-const privKey = process.env.Private_API_KEY
+const pubKey = process.env.PUBLIC_API_KEY
+const privKey = process.env.PRIVATE_API_KEY
 const ts = new Date()
 const reqHash = createHash('md5').update(ts + privKey + pubKey).digest('hex')
 console.log(reqHash)
@@ -49,7 +49,7 @@ axios.get(`http://gateway.marvel.com/v1/public/characters/1009368/comics?&offset
       .then(response => {data = (response)
         // console.log(data.data.data.results[0].images)
         let comicData = data.data.data.results
-        console.log(comicData[0].events)
+        console.log(comicData[0])
     
         // let comicPics = []
         // for(let i=0;i<comicData.length;i++ ){

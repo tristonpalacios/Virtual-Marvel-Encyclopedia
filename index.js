@@ -19,7 +19,7 @@ const options = {
 
 const pubKey = process.env.PUBLIC_API_KEY;
 const privKey = process.env.PRIVATE_API_KEY;
-const ts = new Date();
+const ts = new Date().getTime();
 const reqHash = createHash("md5")
   .update(ts + privKey + pubKey)
   .digest("hex");
@@ -125,30 +125,20 @@ app.get("/search", async (req, res) => {
   }
 });
 
-app.delete("/delete", async (req, res) => {
+app.delete('/', async (req, res) => {
   try {
-    // const foundHero = await db.hero.findOne({
-    //   where: { marvelId: req.params.id },
-    // });
-    // await foundHero.destroy();
-    // res.redirect("/favorites");
-  db.hero.findOrCreate({
+    const deleteFav = await db.users_heroes.findOne({
       where: {
-        marvelId: req.body.marvelKey,
-        name: req.body.name,
-        photo: req.body.photo,
-        more_url: req.body.url,
-      },
+        userId: res.locals.user.id,
+        heroId: req.body.characterId
+      }
     })
-    .then(([hero, Created]) => {
-      res.locals.user.destroy(hero);
-      // console.log(`the new fave is:`, newFave);
-      res.redirect(`/favorites`);
-    })
+    await deleteFav.destroy()
+    res.redirect('/favorites')
   } catch (err) {
-    console.log(err);
+    console.log(err)
   }
-});
+})
 
 app.get("/details/:id", async (req, res) => {
 
@@ -259,7 +249,7 @@ app.post("/fave", async (req, res) => {
     .then(([hero, Created]) => {
       res.locals.user.addHero(hero);
       // console.log(`the new fave is:`, newFave);
-      res.redirect(`${req.body.url}`);
+      res.redirect(`/favorites`);
     })
     .catch((err) => {
       console.log("error", err);
