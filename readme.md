@@ -50,6 +50,8 @@ I want to save all of my favorite Heroes or Villains to my account
 
 ### link to deployed site
 
+https://virtual-marvel-encyclopedia.herokuapp.com/
+
 ### Approach
 
 ### wireframe
@@ -67,13 +69,16 @@ I want to save all of my favorite Heroes or Villains to my account
 |/home      | GET
 |/search    | GET
 |/results    | GET
-|/character   | GET 
+|/details   | GET 
 |/faves        | POST
 |/faves        | GET
 | /users/new         | GET         
 | /users/login          | GET  
 | /users/login          | POST 
 | /users/logout          | POST 
+| /delete          | DELETE 
+| /updateName          | POST
+
 
 ### Sources
 
