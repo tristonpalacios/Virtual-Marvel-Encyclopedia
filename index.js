@@ -9,6 +9,7 @@ const { createHash } = require("crypto");
 const users_heroes = require("./models/users_heroes");
 const hero = require("./models/hero");
 const comment = require("./models/comment");
+const methodOverride = require('method-override');
 
 
 const options = {
@@ -25,6 +26,7 @@ const reqHash = createHash("md5")
   .digest("hex");
 // console.log(reqHash)
 
+
 const app = express(); //create instance of express
 //check for env port if not, use 3000
 const port = process.env.PORT || 3000;
@@ -34,7 +36,7 @@ app.set("view engine", "ejs"); //set the view view engine to ejs
 app.use(cookieParser()); // gives access to req.cookies
 app.use(express.urlencoded({ extended: false })); //makes req.body work
 app.use(ejsLayouts); //tell express to use ejs layouts
-
+app.use(methodOverride('_method'));
 //CUSTOM LOGIN MIDDLEWARE
 app.use(async (req, res, next) => {
   if (req.cookies.userId) {
@@ -103,6 +105,18 @@ app.get("/favorites", async (req, res) => {
   }
 });
 
+app.delete("/delete", async (req, res) => {
+  try {
+    const foundComment = await db.comment.findOne({
+      where: { id: req.body.comId},
+    });
+    await foundComment.destroy();
+    res.redirect(`/details/${req.body.detailId}`);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.get("/search", async (req, res) => {
   try {
     const foundUser = await db.user.findOne({
@@ -125,20 +139,7 @@ app.get("/search", async (req, res) => {
   }
 });
 
-app.delete('/', async (req, res) => {
-  try {
-    const deleteFav = await db.users_heroes.findOne({
-      where: {
-        userId: res.locals.user.id,
-        heroId: req.body.characterId
-      }
-    })
-    await deleteFav.destroy()
-    res.redirect('/favorites')
-  } catch (err) {
-    console.log(err)
-  }
-})
+
 
 app.get("/details/:id", async (req, res) => {
 
@@ -234,6 +235,25 @@ app.post("/", async (req, res) => {
       console.log("error", err);
     });
 });
+
+// Edit users name
+app.put("/:id", async (req, res) => {
+  try {
+    await db.user.update(
+      {
+        userName: req.body.name
+      },
+      {
+        where: {
+          id: req.params.id
+        },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 
 app.post("/fave", async (req, res) => {
   // TODO: Get form data and add a new record to DB

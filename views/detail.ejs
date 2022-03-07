@@ -12,25 +12,26 @@
   <%}%>
 
 </div>
+
+<% if(user){ %>
 <form style="text-align: center;" method="POST" action="/fave">
   <input hidden type="text" name="name" value="<%= results.name %>" >
   <input hidden type="text" name="url" value="<%= `/details/${results.id}` %>" >
   <input hidden type="text" name="photo" value="<%= `${results.thumbnail.path}/portrait_incredible.jpg` %>" >
   <input hidden type="text" name="marvelKey" value="<%= results.id%>" >
-  <% if(favData.heroId === results.id){ %>
-    <p>Favorited! </p>
-    <% }else{ %>
       <button class="btn btn-primary" style="background-color: red; border: solid red;" type="submit">Add to Favorites</button>
-      <% } %>
+     
  
 </form>
 <br>
-<form style="text-align: center;" method="POST" action="/details/<%= results.id %>/?_method=DELETE">
-  <input hidden name="characterId" value="<%= favData.heroId %>">
+<!-- <form style="text-align: center;" method="POST" action="/details/<%=results.id %>/?_method=DELETE">
+  <input hidden name="characterId" value="<%= results.id %>">
   <button class="btn btn-outline-light" type="submit">Remove from favorites</button>
-</form>
+</form> -->
 
-
+<% }else{ %>
+  <a href="/users/login" style="color: black;">sign in or up to add favorites or leave comments</a>
+  <% } %>
 
 <% if(commentData){ %>
   <% commentData.forEach(elem => { %>
@@ -43,6 +44,23 @@
                   <p class="commentLeft" style="font-size: 10px; text-decoration: underline;"><%=elem.createdAt%></p>
                 </div>
                 <p class="commentBody"><%= elem.body%></p>
+                <% if(user.userName === elem.userName){ %>
+                  <form action="/delete/?_method=DELETE" method="post">
+                    <input hidden type="text" name="comId" value="<%= elem.id %>" >
+                    <input hidden type="text" name="detailId" value="<%= results.id %>" >
+                    <input
+
+                      type="submit"
+                      value="Delete this comment"
+                      class="show-submit"
+                      class="center-form"
+
+                      
+                    />
+                  </form>
+                  <% }else{ %>
+  
+                    <% } %>
               </div>
           </div>
       </div>
@@ -53,7 +71,6 @@
       <% }) %>
   </h1>
   <% }else{ %>
-  <p>Be the first to leave a comment!</p>
   
   <% } %>
 </div>
@@ -63,6 +80,7 @@
   <form method="POST" action="/genComment" style="text-align: center;">
     <lable for="genComment"></lable>
     <input hidden type="text" name="name" value="<%= results.name %>" >
+    
     <input hidden type="text" name="url" value="<%= `/details/${results.id}` %>" >
     <input hidden type="text" name="photo" value="<%= `${results.thumbnail.path}/portrait_incredible.jpg` %>" >
     <input hidden type="text" name="marvelKey" value="<%= results.id %>" >
@@ -73,6 +91,7 @@
     
   
 <% }else{ %> 
+
 
 
 <% } %>
