@@ -126,7 +126,9 @@ app.get("/favorites", async (req, res) => {
 app.delete("/delete", async (req, res) => {
   try {
     const foundComment = await db.comment.findOne({
-      where: { id: req.body.comId },
+      where: { id: req.body.comId,
+        //
+      userId:res.locals.user.id },
     });
     await foundComment.destroy();
     res.redirect(`/details/${req.body.detailId}`);
